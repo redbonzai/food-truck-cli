@@ -9,7 +9,7 @@ const options = {
     // apiKey: 'YOUR_API_KEY',
     formatter: null
 }
-// const geocoder = nodeGeoCoder(options);
+
 async function geoLocation(query) {
     let resultLocations;
 
@@ -64,20 +64,17 @@ async function searchFoodTrucks(query, callback) {
         .on('end', async () => {
             if (/[a-zA-Z]/.test(query)) {
                 filteredData = filterByTruckName(query, data);
-                // console.log('By TRUCK NAME:', filteredData)
             }
 
             const {resultLocations, radius} = await geoLocation(query);
             if (resultLocations.length > 0) {
                 const lat = resultLocations[0].latitude;
                 const lon = resultLocations[0].longitude;
+
                 filteredData = [...filteredData, ...data.filter(row => isLocationWithinRadius(row, lat, lon, radius))]
-                console.log('By GEO LOCATION:', filteredData)
             }
 
-            const results = buildFinalResult(filteredData);
-
-            callback(null, results);
+            callback(null, buildFinalResult(filteredData));
         });
 }
 exports.searchFoodTrucks = searchFoodTrucks;
