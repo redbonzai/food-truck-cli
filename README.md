@@ -41,9 +41,10 @@ It will also run with the Google Geo locating API, but you will need to provide 
 - Clone the repo to your local machine
 - CD into the root directory of the project and install 
 ```terminal
-    cd food-truck-cli && npm install && npm install -g (On a windows machine you need to run these commands individually and as an Administrator)
+    cd food-truck-cli && npm install && npm install -g
 ```
-Note, on a Linux / Mac, this gets installed in `/usr/local/bin/food-truck` 
+PLEASE KEEP IN MIND: On a windows machine you need to run these commands individually and as an Administrator
+Also Note that on a Linux / Mac, this gets installed in `/usr/local/bin/food-truck` 
 and on a Windows machine, this gets installed in `C:\Users\{username}\AppData\Roaming\npm\node_modules\food-truck-cli\bin\food-truck`
 
 By the way, if you no longer want this installed on your machine, then please: 
