@@ -14,8 +14,7 @@ searchFoodTrucks(query, (error, results) => {
         console.error('THERE HAS BEEN AN ERROR: ', error);
         process.exit(1);
     } else {
-        console.log(`Found ${results.length} food trucks:`);
-        console.log('WE HAVE RESULTS:', results);
+        console.log(`Found ${results.length} food trucks:`, results);
         process.exit(0);
     }
 });
