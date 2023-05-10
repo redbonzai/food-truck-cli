@@ -1,8 +1,11 @@
 {
   "name": "food-truck-cli",
   "version": "1.0.0",
+  "bin": {
+    "food-truck": "./index.js"
+  },
   "description": "",
-  "main": "exec.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
