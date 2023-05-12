@@ -5,10 +5,12 @@
 This CLI will Perform a geospatial search: Given a zip code, use a geocoding service (such as Google Maps Geocoding API or OpenStreetMap Nominatim API) to obtain the latitude and longitude coordinates of that location. 
 This is done via the geolib NPM package to calculate the distance between each food truck and the search location. 
 This service selects only the food trucks within a 30 mile radius of the search location.
-
 ---
+
 As mentioned above: This cli will run fine with the OpenStreetMap geo locating API.
 It will also run with the Google Geo locating API, but you will need to provide your own API key.
+---
+##### It should be noted that the query results are much more accurate with the Google Maps Geocoding API than with the OpenStreetMap Nominatim API.
 
 ### DESCRIPTION
 >This is a command line interface that allows you to search for food trucks in San Francisco that are open at the current time. 
