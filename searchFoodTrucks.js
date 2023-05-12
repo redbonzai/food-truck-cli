@@ -84,7 +84,6 @@ function buildFinalResult(filteredData, locationsResult) {
     });
 }
 
-
 async function searchFoodTrucks(query, callback) {
     let  data = [];
     let filteredLocations = [];
