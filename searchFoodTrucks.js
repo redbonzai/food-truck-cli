@@ -4,8 +4,8 @@ const geolib = require('geolib');
 const nodeGeoCoder = require('node-geocoder');
 
 const options = {
-    // provider: 'openstreetmap',
-     provider: 'google',
+    provider: 'openstreetmap',
+    //  provider: 'google',
      apiKey: '',
     formatter: null
 }
@@ -41,26 +41,49 @@ function isLocationWithinRadius(row, lat, lon, radiusMeters) {
 
 function buildFinalResult(filteredData, locationsResult) {
     return filteredData.map(row => {
-        const distanceInMiles = locationsResult ? geolib.getPreciseDistance(
-            {latitude: row.Latitude, longitude: row.Longitude},
-            {latitude: locationsResult.latitude, longitude: locationsResult.longitude}
-        )/ 1609.34 : ''
+        const {
+            Latitude,
+            Longitude,
+            locationid,
+            Applicant,
+            Address,
+            LocationDescription,
+            blocklot,
+            permit,
+            Status,
+            Approved,
+            Schedule,
+            dayshours,
+            FoodItems
+        } = row;
+
+        const distanceInMiles = locationsResult
+            ? geolib.getPreciseDistance(
+            { latitude: Latitude, longitude: Longitude },
+            {
+                latitude: locationsResult.latitude,
+                longitude: locationsResult.longitude
+            }
+        ) / 1609.34
+            : '';
 
         return {
-            locationId: row.locationid,
-            applicant: row.Applicant,
-            address: row.Address,
-            locationDescription: row.LocationDescription,
-            blocklot: row.blocklot,
-            permit: row.permit,
-            status: row.Status,
-            approved: row.Approved,
-            schedule: row.Schedule,
-            daysHours: row.dayshours || 'Hourly schedule not posted',
-            foodItems: row.FoodItems,
-            distance: locationsResult ? Number(distanceInMiles.toFixed(2)) + ` miles from ${row.Address}`  : null
-        }});
+            locationId: locationid,
+            applicant: Applicant,
+            address: Address,
+            locationDescription: LocationDescription,
+            blocklot,
+            permit,
+            status: Status,
+            approved: Approved,
+            schedule: Schedule,
+            daysHours: dayshours || 'Hourly schedule not posted',
+            foodItems: FoodItems,
+            distance: locationsResult ? Number(distanceInMiles.toFixed(2)) + ` miles from ${Address}` : null
+        };
+    });
 }
+
 
 async function searchFoodTrucks(query, callback) {
     let  data = [];
@@ -84,7 +107,12 @@ async function searchFoodTrucks(query, callback) {
                 filteredLocations = [...filteredLocations, ...data.filter(row => isLocationWithinRadius(row, lat, lon, defaultRadius))]
             }
 
-            callback(null, buildFinalResult(filteredLocations, resultLocations.length > 0 ? resultLocations[0] : null));
+            const getFirstResultOrDefault = (results) =>
+                results.length > 0
+                    ? results[0]
+                    : null;
+
+            callback(null, buildFinalResult(filteredLocations, getFirstResultOrDefault(resultLocations)));
         });
 }
 exports.searchFoodTrucks = searchFoodTrucks;
