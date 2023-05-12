@@ -17,7 +17,6 @@ async function geoLocation(query) {
 
     const geocoder = nodeGeoCoder(options);
     resultLocations = await geocoder.geocode(query);
-    console.log('RESULT LOCATIONS: ', await resultLocations)
     return resultLocations;
 }
 
