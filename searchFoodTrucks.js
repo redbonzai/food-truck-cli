@@ -13,11 +13,8 @@ const options = {
 const defaultRadius = 100; // 1/16 mile in meters
 
 async function geoLocation(query) {
-    let resultLocations;
-
     const geocoder = nodeGeoCoder(options);
-    resultLocations = await geocoder.geocode(query);
-    return resultLocations;
+    return await geocoder.geocode(query);
 }
 
 function filterByTruckName(query, locationData) {
