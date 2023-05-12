@@ -24,7 +24,8 @@ It will also run with the Google Geo locating API, but you will need to provide 
     approved,
     schedule,
     daysHours,
-    foodItems 
+    foodItems,
+    distance
 ```
 
 ### VALID SEARCHES: 
