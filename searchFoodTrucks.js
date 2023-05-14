@@ -65,7 +65,7 @@ const precisionDistance = (start, end, accuracy = 1) => {
 }
 
 const isLocationWithinRadius = (locatedRow, lat, lon, radiusMeters) => {
-   return geolib.isPointWithinRadius(
+    return geolib.isPointWithinRadius(
         {latitude: parseFloat(locatedRow.Latitude), longitude: parseFloat(locatedRow.Longitude)},
         {latitude: lat, longitude: lon},
         radiusMeters
@@ -92,9 +92,9 @@ const buildFinalResult = (filteredData, locationsResult) => {
 
         const distanceInMiles = locationsResult
             ? precisionDistance(
-            { latitude: Latitude, longitude: Longitude },
-            { latitude: locationsResult.latitude, longitude: locationsResult.longitude }
-        ) : '';
+                { latitude: Latitude, longitude: Longitude },
+                { latitude: locationsResult.latitude, longitude: locationsResult.longitude }
+            ) : '';
 
         return {
             locationId: locationid,
