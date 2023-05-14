@@ -2,7 +2,7 @@
 
 ### GEO LOCATING SERVICES:
 
->This CLI will Perform a geospatial search: Given a zip code, use a geocoding service (such as Google Maps Geocoding API or OpenStreetMap Nominatim API) to obtain the latitude and longitude coordinates of that >location. 
+>This CLI will Perform a geospatial search: Given a zip code, use a geocoding service (such as Google Maps Geocoding API or OpenStreetMap Nominatim API) to obtain the latitude and longitude coordinates of that location. 
 >This is done via the geolib NPM package to calculate the distance between each food truck and the search location. 
 >This service selects only the food trucks within a 30 mile radius of the search location.
 ---

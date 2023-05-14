@@ -50,11 +50,11 @@ const mergeGeoResultsWithCsv = (csvData, geoLocatedResults, defaultRadius) => {
     });
 }
 
-const filterByColumnValues = (query, csvData) => {
+const filterByColumnValues = async (query, csvData) => {
     console.log('query', query)
     const search = query.toLowerCase().trim();
 
-    return csvData.filter(row => Object.values(row)
+    return await csvData.filter(row => Object.values(row)
         .some(val => typeof val === 'string' && val.toLowerCase().includes(search))
     );
 }
@@ -70,6 +70,24 @@ const isLocationWithinRadius = (locatedRow, lat, lon, radiusMeters) => {
         {latitude: lat, longitude: lon},
         radiusMeters
     );
+}
+
+const locationsFromAddressCenter = (geoLocatedResults, data, defaultRadius) => {
+    const {latitude, longitude} = geoLocatedResults[0];
+    const centerCoordinates = geolib.getCenter([
+        {latitude, longitude}
+    ])
+
+    return data.filter((csvRow) => {
+        const rowLatitude = parseFloat(csvRow.Latitude);
+        const rowLongitude = parseFloat(csvRow.Longitude);
+
+        const distance = geolib.getDistance(
+            {latitude: rowLatitude, longitude: rowLongitude},
+            centerCoordinates
+        )
+        return distance <= defaultRadius;
+    });
 }
 
 const buildFinalResult = (filteredData, locationsResult) => {
@@ -153,7 +171,7 @@ const compileSearch = async(query, radius, address, name) => {
         geoLocatedResults = await geoLocation(query);
         filteredLocations = mergeGeoResultsWithCsv(data, geoLocatedResults, defaultRadius);
 
-        filteredLocations = [...filteredLocations, ...filterByColumnValues(name, filteredLocations)];
+        filteredLocations = [...filteredLocations, ...await filterByColumnValues(name, filteredLocations)];
         return {geoLocatedResults, filteredLocations}
     }
 
@@ -172,9 +190,15 @@ const compileSearch = async(query, radius, address, name) => {
         geoLocatedResults = await geoLocation(query);
         filteredLocations = mergeGeoResultsWithCsv(data, geoLocatedResults, defaultRadius);
 
+        if (geoLocatedResults.length > 0 && filteredLocations.length === 0) {
+            filteredLocations = [
+                ...filteredLocations,
+                ...locationsFromAddressCenter(geoLocatedResults, data, defaultRadius)
+            ];
+        }
+
         return {geoLocatedResults, filteredLocations}
     }
-
 }
 
 module.exports = {
