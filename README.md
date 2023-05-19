@@ -77,12 +77,11 @@ By the way, if you no longer want this installed on your machine, then please:
 
 ### HOW TO MAKE THIS CLI WORK
 ### OPTIONS:
-> there is currently only one option: --radius
 ```terminal
 food-truck "1265 GROVE ST" --radius 300
 ```
 ### EXAMPLE:
->The default radius is 100 meters (about 1/16 of a mile).  If you want to change that, you have to provide the --radius option
+>The default radius is 200 meters (about 1/12 of a mile).  If you want to change that, you have to provide the --radius option
 > That option only excepts integer values.
 ---
 If you run the cli with the zip code: 94114, there aren't any locations within 1/16 of a mile of of it. 
