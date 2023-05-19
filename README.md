@@ -46,6 +46,11 @@ It will also run with the Google Geo locating API, but you will need to provide 
 ```terminal
     cd food-truck-cli && npm install && npm install -g
 ```
+- Create .env file and then add your Google Geolocation API KEY to the `GOOGLE_API_KEY` key.
+```terminal
+cp .env.example .env
+```
+---
 PLEASE KEEP IN MIND: On a windows machine you need to run these commands individually and as an Administrator
 Also Note that on a Linux / Mac, this gets installed in `/usr/local/bin/food-truck` 
 and on a Windows machine, this gets installed in `C:\Users\{username}\AppData\Roaming\npm\node_modules\food-truck-cli\bin\food-truck`
@@ -57,7 +62,7 @@ By the way, if you no longer want this installed on your machine, then please:
 
 ### HOW TO MAKE THIS CLI WORK
 ### OPTIONS:
-> there is currently only one option: --radius 
+> there is currently only one option: --radius
 ```terminal
 food-truck "1265 GROVE ST" --radius 300
 ```
