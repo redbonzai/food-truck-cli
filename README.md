@@ -50,6 +50,20 @@ It will also run with the Google Geo locating API, but you will need to provide 
 ```terminal
 cp .env.example .env
 ```
+- To use OpenStreetMap API, inside the geo-location.service.ts: 
+Change this: 
+```terminal
+    const options: GoogleOptions = {
+      provider: "google",
+      apiKey: process.env.GOOGLE_API_KEY,
+    };
+```
+TO THIS: 
+```terminal
+  const options: OpenStreetMapOptions = {
+        provider: 'openstreetmap',
+    };
+```
 ---
 PLEASE KEEP IN MIND: On a windows machine you need to run these commands individually and as an Administrator
 Also Note that on a Linux / Mac, this gets installed in `/usr/local/bin/food-truck` 
