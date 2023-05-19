@@ -50,8 +50,9 @@ It will also run with the Google Geo locating API, but you will need to provide 
 ```terminal
 cp .env.example .env
 ```
-- To use OpenStreetMap API, inside the geo-location.service.ts: 
-Change this: 
+- To use OpenStreetMap API, inside the geo-location.service.ts:
+ 
+CHANGE THIS: 
 ```terminal
     const options: GoogleOptions = {
       provider: "google",
